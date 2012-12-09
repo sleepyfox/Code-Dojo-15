@@ -19,5 +19,5 @@ We have recently signed a supplier of conjured items. This requires an update to
 
 * “Conjured” items degrade in Quality twice as fast as normal items
 
-Feel free to make any changes to the UpdateQuality method and add any new code as long as everything still works correctly. However, do not alter the Items list or the Item factory as this belongs to the irascible lady developer named 'Onyxia' in the corner who will insta-rage and kill everyone as they don’t believe in shared code ownership. You have been warned!
+Feel free to make any changes to the UpdateQuality method and add any new code as long as everything still works correctly. However, do not alter the Items list or the Item factory as this belongs to the our CTO 'Onyxia' (a bit of an old dragon) in the corner office who will enrage and fire everyone as they don’t believe in shared code ownership. You have been warned!
 
