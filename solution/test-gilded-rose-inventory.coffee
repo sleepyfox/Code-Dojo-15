@@ -1,6 +1,6 @@
 should = require('chai').should()
 IM = require './InventoryManager'
-[items, updateQuality] = [IM.items, IM.updateQuality]
+[items, updateQuality, reduceByAmount] = [IM.items, IM.updateQuality, IM.reduceByAmount]
 
 qualityTable = {
   days: [
@@ -21,7 +21,17 @@ describe 'Gilded Rose tests', ->
   describe 'test inventory setup', ->
     it 'there should be 6 items in the inventory', ->
       items.should.have.length 6
-    
+  
+  describe 'Quality reduction logic tests', ->
+    it 'normal reduction should be 1 per day', ->
+      reduceByAmount(3, false).should.equal 1
+    it 'after sell by date reduction should be 2', ->
+      reduceByAmount(-1, false).should.equal 2
+    it 'conjured items should reduce by 2 per day normally', ->
+      reduceByAmount(1, true).should.equal 2
+    it 'conjured items after their sell by date should reduce by 4', ->
+      reduceByAmount(-1, true).should.equal 4
+
   describe 'After day 1...', ->
 
     it '+5 Dexterity Vest should have quality 19', ->
@@ -55,7 +65,7 @@ describe 'Gilded Rose tests', ->
     it 'Backstage passes should have 14 days left to sell', ->
       items[4].sellBy.should.equal 14
 
-    xit 'Conjured Mana Cake should have quality 4', ->
+    it 'Conjured Mana Cake should have quality 4', ->
       items[5].quality.should.equal 4
 
     it 'Conjured Mana Cake should have 2 days left to sell', ->
@@ -93,7 +103,7 @@ describe 'Gilded Rose tests', ->
     it 'Backstage passes should have 13 days left to sell', ->
       items[4].sellBy.should.equal 13
 
-    xit 'Conjured Mana Cake should have quality 2', ->
+    it 'Conjured Mana Cake should have quality 2', ->
       items[5].quality.should.equal 2
 
     it 'Conjured Mana Cake should have 1 days left to sell', ->
