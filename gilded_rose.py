@@ -7,15 +7,12 @@ TEN_DAYS = 10
 FIVE_DAYS = 5
 
 class GildedRose(object):
-
     def __init__(self, items):
         self.items = items
 
     def update_quality(self):
         for item in self.items:
-            item.update_sell_in_value()
-            item.update_quality_value()
-            item.update_quality_when_sellin_passed()
+            item.age_one_day()
 
 class Item:
     def __init__(self, name, sell_in, quality):
@@ -30,35 +27,39 @@ class Stock_Item(Item):
     def out_of_date(self):
         return self.sell_in < 0
 
-    def update_sell_in_value(self):
+    def age_one_day(self):
         if self.name != SULFURAS:
             self.sell_in -= 1
+        self.update_quality()
 
-    def _improve_quality(self):
-        if self.quality < 50:
-            self.quality += 1
+    def _improve_quality(self, amount):
+        if self.name != SULFURAS:
+            self.quality += amount
+            if self.quality > 50:
+                self.quality = 50
 
-    def _reduce_quality(self):
-        if self.quality > 0 and self.name != SULFURAS:
-            self.quality -= 1
+    def _reduce_quality(self, amount):
+        if self.name != SULFURAS:
+            self.quality -= amount
+            if self.quality < 0:
+                self.quality = 0
 
-    def update_quality_value(self):
-        if self.name == AGED_BRIE:
-            self._improve_quality()
-        elif self.name == BACKSTAGE_PASS:
-            self._improve_quality()
-            if self.sell_in < TEN_DAYS:
-                self._improve_quality()
-            if self.sell_in < FIVE_DAYS:
-                self._improve_quality()
-        else:
-            self._reduce_quality()
-
-    def update_quality_when_sellin_passed(self):
+    def update_quality(self):
         if self.out_of_date():
             if self.name == AGED_BRIE:
-                self._improve_quality()
+                self._improve_quality(2)
             elif self.name == BACKSTAGE_PASS:
                 self.quality = 0
             else:
-                self._reduce_quality()
+                self._reduce_quality(2)
+        else:
+            if self.name == AGED_BRIE:
+                self._improve_quality(1)
+            elif self.name == BACKSTAGE_PASS:
+                self._improve_quality(1)
+                if self.sell_in < TEN_DAYS:
+                    self._improve_quality(1)
+                if self.sell_in < FIVE_DAYS:
+                    self._improve_quality(1)
+            else:
+                self._reduce_quality(1)
