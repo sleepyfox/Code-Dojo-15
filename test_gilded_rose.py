@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gilded_rose import Stock_Item, GildedRose
+from gilded_rose import Legendary_Item, Stock_Item, GildedRose
 
 class GildedRoseTest(unittest.TestCase):
     def test_item_decreases_in_quality_by_one(self):
@@ -35,16 +35,16 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(0, items[0].quality)
 
     def test_legendary_items_dont_have_to_be_sold(self):
-        items = [Stock_Item("Sulfuras, Hand of Ragnaros", 1, 1)]
+        items = [Legendary_Item("Sulfuras, Hand of Ragnaros", 1, 80)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(1, items[0].sell_in)
 
     def test_legendary_items_dont_decrease_in_quality(self):
-        items = [Stock_Item("Sulfuras, Hand of Ragnaros", 1, 1)]
+        items = [Legendary_Item("Sulfuras, Hand of Ragnaros", 1, 80)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
-        self.assertEqual(1, items[0].quality)
+        self.assertEqual(80, items[0].quality)
 
     def test_quality_degrades_twice_as_fast_when_sellby_date_passed(self):
         items = [Stock_Item("Elixir of the Mongoose,", 0, 5)]
@@ -77,10 +77,10 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(7, items[0].quality)
 
     def test_backstage_pass_loses_quality_at_sell_by(self):
-            items = [Stock_Item("Backstage passes to a TAFKAL80ETC concert", 0, 4)]
-            gilded_rose = GildedRose(items)
-            gilded_rose.update_quality()
-            self.assertEqual(0, items[0].quality)
+        items = [Stock_Item("Backstage passes to a TAFKAL80ETC concert", 0, 4)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(0, items[0].quality)
 
 if __name__ == '__main__':
     unittest.main()

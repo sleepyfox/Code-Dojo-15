@@ -28,21 +28,18 @@ class Stock_Item(Item):
         return self.sell_in < 0
 
     def age_one_day(self):
-        if self.name != SULFURAS:
-            self.sell_in -= 1
+        self.sell_in -= 1
         self.update_quality()
 
     def _improve_quality(self, amount):
-        if self.name != SULFURAS:
-            self.quality += amount
-            if self.quality > 50:
-                self.quality = 50
+        self.quality += amount
+        if self.quality > 50:
+            self.quality = 50
 
     def _reduce_quality(self, amount):
-        if self.name != SULFURAS:
-            self.quality -= amount
-            if self.quality < 0:
-                self.quality = 0
+        self.quality -= amount
+        if self.quality < 0:
+            self.quality = 0
 
     def update_quality(self):
         if self.out_of_date():
@@ -56,10 +53,15 @@ class Stock_Item(Item):
             if self.name == AGED_BRIE:
                 self._improve_quality(1)
             elif self.name == BACKSTAGE_PASS:
-                self._improve_quality(1)
-                if self.sell_in < TEN_DAYS:
-                    self._improve_quality(1)
                 if self.sell_in < FIVE_DAYS:
+                    self._improve_quality(3)
+                elif self.sell_in < TEN_DAYS:
+                    self._improve_quality(2)
+                else:
                     self._improve_quality(1)
             else:
                 self._reduce_quality(1)
+
+class Legendary_Item(Stock_Item):
+    def age_one_day(self):
+        self.quality = 80
