@@ -12,8 +12,7 @@ class GildedRose(object):
     def update_quality(self):
         for item in self.items:
             self._update_quality(item)
-            if item.name != ITEM_SULFURAS:
-                item.sell_in = item.sell_in - 1
+            self._update_sell_in_value(item)
             self._update_quality_when_sellin_passed(item)
 
     def _update_quality(self, item):
@@ -31,6 +30,10 @@ class GildedRose(object):
                     if item.sell_in < 6:
                         if item.quality < 50:
                             item.quality = item.quality + 1
+
+    def _update_sell_in_value(self, item):
+        if item.name != ITEM_SULFURAS:
+            item.sell_in = item.sell_in - 1
 
     def _update_quality_when_sellin_passed(self, item):
         if item.sell_in < 0:
