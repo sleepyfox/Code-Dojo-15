@@ -18,10 +18,10 @@ qualityTable = {
 }
 
 describe 'Gilded Rose tests', ->
-  describe 'test inventory setup', ->
+  describe 'Test inventory setup', ->
     it 'there should be 6 items in the inventory', ->
       items.should.have.length 6
-  
+
   describe 'Quality reduction logic tests', ->
     it 'normal reduction should be 1 per day', ->
       reduceByAmount(3, false).should.equal 1
@@ -46,7 +46,7 @@ describe 'Gilded Rose tests', ->
 
     it 'Aged Brie should have 1 day left to sell', ->
       items[1].sellBy.should.equal 1
-    
+
     it 'Elixir of the Mongoose should have quality 6', ->
       items[2].quality.should.equal 6
 
@@ -81,7 +81,7 @@ describe 'Gilded Rose tests', ->
 
     it 'Aged Brie should have quality 2', ->
       items[1].quality.should.equal 2
-    
+
     it 'Aged Brie should have 0 days left to sell', ->
       items[1].sellBy.should.equal 0
 
@@ -108,4 +108,3 @@ describe 'Gilded Rose tests', ->
 
     it 'Conjured Mana Cake should have 1 days left to sell', ->
       items[5].sellBy.should.equal 1
-
