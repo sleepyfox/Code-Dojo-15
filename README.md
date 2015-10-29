@@ -21,6 +21,10 @@ You can run the included code in this project with:
     npm test
 ```
 
+A worked example of the Python starter code linked above can be found in the 'python' folder [here](./python/). 
+
+A worked example of the CoffeeScript starter code in this repo can be found in the 'solution' folder [here](./coffee/.solution).
+
 The source of the kata is the Gilded Rose kata, from [here](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/)
 
 I've also linked the [slides](https://speakerdeck.com/sleepyfox/code-dojo-15-dec-2012) from the meeting. You can find out more about the London Code Dojo at our [homepage](http://www.meetup.com/London-Code-Dojo/).
