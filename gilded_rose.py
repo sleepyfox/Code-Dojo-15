@@ -43,13 +43,14 @@ class Stock_Item(Item):
             self.quality -= 1
 
     def update_quality_value(self):
-        if self.name == AGED_BRIE or self.name == BACKSTAGE_PASS:
+        if self.name == AGED_BRIE:
             self._improve_quality()
-            if self.name == BACKSTAGE_PASS:
-                if self.sell_in < TEN_DAYS:
-                    self._improve_quality()
-                if self.sell_in < FIVE_DAYS:
-                    self._improve_quality()
+        elif self.name == BACKSTAGE_PASS:
+            self._improve_quality()
+            if self.sell_in < TEN_DAYS:
+                self._improve_quality()
+            if self.sell_in < FIVE_DAYS:
+                self._improve_quality()
         else:
             self._reduce_quality()
 
