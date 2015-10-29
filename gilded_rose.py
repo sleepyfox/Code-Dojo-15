@@ -1,10 +1,14 @@
 # -*- coding: utf-8 -*-
 
+# Symbolic constants
 AGED_BRIE = "Aged Brie"
 BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert"
 SULFURAS = "Sulfuras, Hand of Ragnaros"
 TEN_DAYS = 10
 FIVE_DAYS = 5
+MAX_ITEM_QUALITY = 50
+MIN_ITEM_QUALITY = 0
+LEGENDARY_ITEM_QUALITY = 80
 
 class GildedRose(object):
     def __init__(self, items):
@@ -33,13 +37,13 @@ class Stock_Item(Item):
 
     def _improve_quality(self, amount):
         self.quality += amount
-        if self.quality > 50:
-            self.quality = 50
+        if self.quality > MAX_ITEM_QUALITY:
+            self.quality = MAX_ITEM_QUALITY
 
     def _reduce_quality(self, amount):
         self.quality -= amount
-        if self.quality < 0:
-            self.quality = 0
+        if self.quality < MIN_ITEM_QUALITY:
+            self.quality = MIN_ITEM_QUALITY
 
     def update_quality(self):
         if self.out_of_date():
@@ -49,7 +53,7 @@ class Stock_Item(Item):
 
 class Legendary_Item(Stock_Item):
     def age_one_day(self):
-        self.quality = 80
+        self.quality = LEGENDARY_ITEM_QUALITY
 
 class Cheese_Item(Stock_Item):
     def update_quality(self):
@@ -61,7 +65,7 @@ class Cheese_Item(Stock_Item):
 class Backstage_Item(Stock_Item):
     def update_quality(self):
         if self.out_of_date():
-            self.quality = 0
+            self.quality = MIN_ITEM_QUALITY
         elif self.sell_in < FIVE_DAYS:
             self._improve_quality(3)
         elif self.sell_in < TEN_DAYS:
