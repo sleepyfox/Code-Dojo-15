@@ -15,21 +15,25 @@ class GildedRose(object):
             self._update_sell_in_value(item)
             self._update_quality_when_sellin_passed(item)
 
+    def _improve_quality(self, item):
+        if item.quality < 50:
+            item.quality += 1
+
+    def _reduce_quality(self, item):
+        if item.quality > 0:
+            item.quality -= 1
+
     def _update_quality_value(self, item):
-        if item.name != ITEM_AGED_BRIE and item.name != ITEM_BACKSTAGE_PASS:
-            if item.quality > 0:
-                if item.name != ITEM_SULFURAS:
-                    item.quality = item.quality - 1
+        if item.name == ITEM_AGED_BRIE or item.name == ITEM_BACKSTAGE_PASS:
+            self._improve_quality(item)
+            if item.name == ITEM_BACKSTAGE_PASS:
+                if item.sell_in < 11:
+                    self._improve_quality(item)
+                if item.sell_in < 6:
+                    self._improve_quality(item)
         else:
-            if item.quality < 50:
-                item.quality = item.quality + 1
-                if item.name == ITEM_BACKSTAGE_PASS:
-                    if item.sell_in < 11:
-                        if item.quality < 50:
-                            item.quality = item.quality + 1
-                    if item.sell_in < 6:
-                        if item.quality < 50:
-                            item.quality = item.quality + 1
+            if item.name != ITEM_SULFURAS:
+                self._reduce_quality(item)
 
     def _update_sell_in_value(self, item):
         if item.name != ITEM_SULFURAS:
@@ -39,15 +43,12 @@ class GildedRose(object):
         if item.sell_in < 0:
             if item.name != ITEM_AGED_BRIE:
                 if item.name != ITEM_BACKSTAGE_PASS:
-                    if item.quality > 0:
-                        if item.name != ITEM_SULFURAS:
-                            item.quality = item.quality - 1
+                    if item.name != ITEM_SULFURAS:
+                        self._reduce_quality(item)
                 else:
-                    item.quality = item.quality - item.quality
+                    item.quality = 0
             else:
-                if item.quality < 50:
-                    item.quality = item.quality + 1
-
+                self._improve_quality(item)
 
 class Item:
     def __init__(self, name, sell_in, quality):
