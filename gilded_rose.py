@@ -43,20 +43,9 @@ class Stock_Item(Item):
 
     def update_quality(self):
         if self.out_of_date():
-            if self.name == BACKSTAGE_PASS:
-                self.quality = 0
-            else:
-                self._reduce_quality(2)
+            self._reduce_quality(2)
         else:
-            if self.name == BACKSTAGE_PASS:
-                if self.sell_in < FIVE_DAYS:
-                    self._improve_quality(3)
-                elif self.sell_in < TEN_DAYS:
-                    self._improve_quality(2)
-                else:
-                    self._improve_quality(1)
-            else:
-                self._reduce_quality(1)
+            self._reduce_quality(1)
 
 class Legendary_Item(Stock_Item):
     def age_one_day(self):

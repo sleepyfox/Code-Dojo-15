@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from gilded_rose import Legendary_Item, Cheese_Item, Stock_Item, GildedRose
+from gilded_rose import Legendary_Item, Cheese_Item, Backstage_Item, Stock_Item, GildedRose
 
 class GildedRoseTest(unittest.TestCase):
     def test_item_decreases_in_quality_by_one(self):
@@ -59,25 +59,25 @@ class GildedRoseTest(unittest.TestCase):
         self.assertEqual(7, items[0].quality)
 
     def test_backstage_pass_increases_in_quality_until_10_before_sell_by(self):
-        items = [Stock_Item("Backstage passes to a TAFKAL80ETC concert", 11, 5)]
+        items = [Backstage_Item("Backstage passes to a TAFKAL80ETC concert", 11, 5)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(6, items[0].quality)
 
     def test_backstage_pass_increases_in_quality__by_two_until_5_before_sell_by(self):
-        items = [Stock_Item("Backstage passes to a TAFKAL80ETC concert", 10, 5)]
+        items = [Backstage_Item("Backstage passes to a TAFKAL80ETC concert", 10, 5)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(7, items[0].quality)
 
     def test_backstage_pass_increases_in_quality_by_3_until_sell_by(self):
-        items = [Stock_Item("Backstage passes to a TAFKAL80ETC concert", 5, 4)]
+        items = [Backstage_Item("Backstage passes to a TAFKAL80ETC concert", 5, 4)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(7, items[0].quality)
 
     def test_backstage_pass_loses_quality_at_sell_by(self):
-        items = [Stock_Item("Backstage passes to a TAFKAL80ETC concert", 0, 4)]
+        items = [Backstage_Item("Backstage passes to a TAFKAL80ETC concert", 0, 4)]
         gilded_rose = GildedRose(items)
         gilded_rose.update_quality()
         self.assertEqual(0, items[0].quality)
