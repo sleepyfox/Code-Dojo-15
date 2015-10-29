@@ -18,7 +18,7 @@ There is a CoffeeScript version of the starter code in the ['coffee'](./coffee/)
 
 You can run the included code in this project with:
 ```bash
-    mocha --compilers coffee:coffee-script test-*.coffee
+    npm test
 ```
 
 The source of the kata is the Gilded Rose kata, from [here](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/)
