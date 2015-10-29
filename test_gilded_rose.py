@@ -34,5 +34,11 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(0, items[0].quality)
 
+    def test_legendary_items_dont_have_to_be_sold(self):
+        items = [Item("Sulfuras, Hand of Ragnaros", 1, 1)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(1, items[0].sell_in)
+
 if __name__ == '__main__':
     unittest.main()
