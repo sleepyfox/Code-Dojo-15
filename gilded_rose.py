@@ -3,6 +3,8 @@
 AGED_BRIE = "Aged Brie"
 BACKSTAGE_PASS = "Backstage passes to a TAFKAL80ETC concert"
 SULFURAS = "Sulfuras, Hand of Ragnaros"
+TEN_DAYS = 10
+FIVE_DAYS = 5
 
 class GildedRose(object):
 
@@ -25,6 +27,9 @@ class Item:
         return "%s, %s, %s" % (self.name, self.sell_in, self.quality)
 
 class Stock_Item(Item):
+    def out_of_date(self):
+        return self.sell_in < 0
+
     def update_sell_in_value(self):
         if self.name != SULFURAS:
             self.sell_in -= 1
@@ -34,27 +39,25 @@ class Stock_Item(Item):
             self.quality += 1
 
     def _reduce_quality(self):
-        if self.quality > 0:
+        if self.quality > 0 and self.name != SULFURAS:
             self.quality -= 1
 
     def update_quality_value(self):
         if self.name == AGED_BRIE or self.name == BACKSTAGE_PASS:
             self._improve_quality()
             if self.name == BACKSTAGE_PASS:
-                if self.sell_in < 10:
+                if self.sell_in < TEN_DAYS:
                     self._improve_quality()
-                if self.sell_in < 5:
+                if self.sell_in < FIVE_DAYS:
                     self._improve_quality()
         else:
-            if self.name != SULFURAS:
-                self._reduce_quality()
+            self._reduce_quality()
 
     def update_quality_when_sellin_passed(self):
-        if self.sell_in < 0:
+        if self.out_of_date():
             if self.name != AGED_BRIE:
                 if self.name != BACKSTAGE_PASS:
-                    if self.name != SULFURAS:
-                        self._reduce_quality()
+                    self._reduce_quality()
                 else:
                     self.quality = 0
             else:
