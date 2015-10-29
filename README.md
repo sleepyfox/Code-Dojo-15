@@ -7,26 +7,22 @@ Other versions of the Gilded Rose starter code for different languages can be fo
 * C# [link](https://github.com/NotMyself/GildedRose)
 * Ruby [link](https://github.com/jimweirich/gilded_rose_kata)
 * Java [link](https://github.com/alexaitken/GildedRose_java)
-* Python [link]()https://github.com/Kyoku57/gildedRosePythonVersion
+* Python [link](https://github.com/Kyoku57/gildedRosePythonVersion)
 * Clojure [link](https://github.com/mjansen401/gilded-rose-clojure)
 * Javascript [link](https://github.com/guyroyse/gilded-rose-javascript)
 
-You can run the included code in this project (assuming you have node, coffeescript, mocha and chai installed) with:
-
-    mocha --compilers coffee:coffee-script test-*.coffee
-
-You can install dependencies automatically with:
-
+There is a CoffeeScript version of the starter code in the ['coffee'](./coffee/) folder; from within that folder you can install dependencies automatically with:
+```bash
     npm install
+```
 
-(though you will need mocha and coffeescript installed globally)
-
-I have set up a watchr file (kata.watchr) so that the tests are run automatically every time you save a file in your editor, simply run watchr (if you have it installed) with:
-    
-    watchr kata.watchr
+You can run the included code in this project with:
+```bash
+    mocha --compilers coffee:coffee-script test-*.coffee
+```
 
 The source of the kata is the Gilded Rose kata, from [here](http://iamnotmyself.com/2011/02/13/refactor-this-the-gilded-rose-kata/)
 
-I've also linked the [slides]() from the meeting. You can find out more about the London Code Dojo at our [homepage](http://www.meetup.com/London-Code-Dojo/).
+I've also linked the [slides](https://speakerdeck.com/sleepyfox/code-dojo-15-dec-2012) from the meeting. You can find out more about the London Code Dojo at our [homepage](http://www.meetup.com/London-Code-Dojo/).
 
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported license - see [http://creativecommons.org/licenses/by-nc-sa/3.0/](http://creativecommons.org/licenses/by-nc-sa/3.0/)
