@@ -46,5 +46,11 @@ class GildedRoseTest(unittest.TestCase):
         gilded_rose.update_quality()
         self.assertEqual(1, items[0].quality)
 
+    def test_quality_degrades_twice_as_fast_when_sellby_date_passed(self):
+        items = [Item("Elixir of the Mongoose,", 0, 5)]
+        gilded_rose = GildedRose(items)
+        gilded_rose.update_quality()
+        self.assertEqual(3, items[0].quality)
+
 if __name__ == '__main__':
     unittest.main()
