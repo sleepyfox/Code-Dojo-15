@@ -15,14 +15,6 @@ class GildedRose(object):
             item.update_quality_value()
             item.update_quality_when_sellin_passed()
 
-    def _improve_quality(self, item):
-        if item.quality < 50:
-            item.quality += 1
-
-    def _reduce_quality(self, item):
-        if item.quality > 0:
-            item.quality -= 1
-
 class Item:
     def __init__(self, name, sell_in, quality):
         self.name = name
