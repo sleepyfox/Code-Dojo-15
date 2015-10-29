@@ -13,7 +13,7 @@ class GildedRose(object):
         for item in self.items:
             item.update_sell_in_value()
             item.update_quality_value()
-            self._update_quality_when_sellin_passed(item)
+            item.update_quality_when_sellin_passed()
 
     def _improve_quality(self, item):
         if item.quality < 50:
@@ -22,17 +22,6 @@ class GildedRose(object):
     def _reduce_quality(self, item):
         if item.quality > 0:
             item.quality -= 1
-
-    def _update_quality_when_sellin_passed(self, item):
-        if item.sell_in < 0:
-            if item.name != AGED_BRIE:
-                if item.name != BACKSTAGE_PASS:
-                    if item.name != SULFURAS:
-                        self._reduce_quality(item)
-                else:
-                    item.quality = 0
-            else:
-                self._improve_quality(item)
 
 class Item:
     def __init__(self, name, sell_in, quality):
@@ -67,3 +56,14 @@ class Stock_Item(Item):
         else:
             if self.name != SULFURAS:
                 self._reduce_quality()
+
+    def update_quality_when_sellin_passed(self):
+        if self.sell_in < 0:
+            if self.name != AGED_BRIE:
+                if self.name != BACKSTAGE_PASS:
+                    if self.name != SULFURAS:
+                        self._reduce_quality()
+                else:
+                    self.quality = 0
+            else:
+                self._improve_quality()
