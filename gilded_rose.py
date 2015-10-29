@@ -11,11 +11,11 @@ class GildedRose(object):
 
     def update_quality(self):
         for item in self.items:
-            self._update_quality(item)
+            self._update_quality_value(item)
             self._update_sell_in_value(item)
             self._update_quality_when_sellin_passed(item)
 
-    def _update_quality(self, item):
+    def _update_quality_value(self, item):
         if item.name != ITEM_AGED_BRIE and item.name != ITEM_BACKSTAGE_PASS:
             if item.quality > 0:
                 if item.name != ITEM_SULFURAS:
