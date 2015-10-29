@@ -55,10 +55,9 @@ class Stock_Item(Item):
 
     def update_quality_when_sellin_passed(self):
         if self.out_of_date():
-            if self.name != AGED_BRIE:
-                if self.name != BACKSTAGE_PASS:
-                    self._reduce_quality()
-                else:
-                    self.quality = 0
-            else:
+            if self.name == AGED_BRIE:
                 self._improve_quality()
+            elif self.name == BACKSTAGE_PASS:
+                self.quality = 0
+            else:
+                self._reduce_quality()
