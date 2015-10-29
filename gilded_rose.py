@@ -68,3 +68,14 @@ class Cheese_Item(Stock_Item):
             self._improve_quality(2)
         else:
             self._improve_quality(1)
+
+class Backstage_Item(Stock_Item):
+    def update_quality(self):
+        if self.out_of_date():
+            self.quality = 0
+        elif self.sell_in < FIVE_DAYS:
+            self._improve_quality(3)
+        elif self.sell_in < TEN_DAYS:
+            self._improve_quality(2)
+        else:
+            self._improve_quality(1)
