@@ -43,16 +43,12 @@ class Stock_Item(Item):
 
     def update_quality(self):
         if self.out_of_date():
-            if self.name == AGED_BRIE:
-                self._improve_quality(2)
-            elif self.name == BACKSTAGE_PASS:
+            if self.name == BACKSTAGE_PASS:
                 self.quality = 0
             else:
                 self._reduce_quality(2)
         else:
-            if self.name == AGED_BRIE:
-                self._improve_quality(1)
-            elif self.name == BACKSTAGE_PASS:
+            if self.name == BACKSTAGE_PASS:
                 if self.sell_in < FIVE_DAYS:
                     self._improve_quality(3)
                 elif self.sell_in < TEN_DAYS:
@@ -65,3 +61,10 @@ class Stock_Item(Item):
 class Legendary_Item(Stock_Item):
     def age_one_day(self):
         self.quality = 80
+
+class Cheese_Item(Stock_Item):
+    def update_quality(self):
+        if self.out_of_date():
+            self._improve_quality(2)
+        else:
+            self._improve_quality(1)
