@@ -10,13 +10,13 @@ Pretty simple, right? Well this is where it gets interesting:
 
 * Once the sell by date has passed, Quality degrades twice as fast
 * The Quality of an item is never negative
-* “Aged Brie” actually increases in Quality the older it gets
+* "Aged Brie" actually increases in Quality the older it gets
 * The Quality of an item is never more than 50
-* “Sulfuras”, being a legendary item, never has to be sold nor decreases in Quality
-* “Backstage passes”, like Aged Brie, increases in Quality as their SellIn value approaches; Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less, but Quality drops to 0 after the concert is over.
+* "Sulfuras", being a legendary item, never has to be sold nor decreases in Quality
+* "Backstage passes", like Aged Brie, increases in Quality as their SellIn value approaches; Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less, but Quality drops to 0 after the concert is over.
 
 We have recently signed a supplier of conjured items. This requires an update to our system (which is where you come in):
 
-* “Conjured” items degrade in Quality twice as fast as normal items
+* "Conjured" items degrade in Quality twice as fast as normal items
 
 Feel free to make any changes to the UpdateQuality method and add any new code as long as everything still works correctly. However, do not alter the Items list or the Item factory as this belongs to the our CTO 'Onyxia' (a bit of an old dragon) in the corner office who will enrage and fire everyone as they don’t believe in shared code ownership. You have been warned!
